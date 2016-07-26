@@ -26,11 +26,11 @@ def main():
     bc3 = "wc -c a.tar.gz"
     bc4 = "wc -c b.tar.gz"
     p1 = subprocess.Popen(bc3.split(), stdout=subprocess.PIPE)
-    out1 = str(p1.communicate()[0])
+    out1 = p1.communicate()[0]
     sizea = [int(s) for s in out1.split() if s.isdigit()][0]
 
     p2 = subprocess.Popen(bc4.split(), stdout=subprocess.PIPE)
-    out2 = str(p2.communicate()[0])
+    out2 = p2.communicate()[0]
     sizeb = [int(s) for s in out2.split() if s.isdigit()][0]    
     
     diff = sizeb - sizea
