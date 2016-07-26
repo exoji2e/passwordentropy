@@ -1,5 +1,6 @@
 import subprocess
 import time
+import re
 
 def main():
     print('Tell me your password :3')
@@ -11,32 +12,38 @@ def main():
     appendedlist.write(plist)
     appendedlist.write(password)
     appendedlist.close()
+    
+    #compresses both files
     bc1 = "tar -cvzf a.tar.gz passwords_john.txt"
     bc2 = "tar -cvzf b.tar.gz appendedplist.txt"
-    process1 = subprocess.Popen(bc1.split(), stdout=subprocess.PIPE)
-    #print(process1.communicate())
-    process2 = subprocess.Popen(bc2.split(), stdout=subprocess.PIPE)
+    subprocess.Popen(bc1.split(), stdout=subprocess.PIPE)
+    subprocess.Popen(bc2.split(), stdout=subprocess.PIPE)
+
+    #if we dont sleep sometimes the compression isn't finished, and filesizes are not correct.
+    time.sleep(1)
+    
+    #counts size in bytes of both compressed files
     bc3 = "wc -c a.tar.gz"
     bc4 = "wc -c b.tar.gz"
-    time.sleep(1)
-    process3 = subprocess.Popen(bc3.split(), stdout=subprocess.PIPE)
-    x = int(str(process3.communicate()[0]).split(' ')[3],10)
-    process4 = subprocess.Popen(bc4.split(), stdout=subprocess.PIPE)
-    y = int(str(process4.communicate()[0]).split(' ')[3],10)
- 
-    time.sleep(1)
+    p1 = subprocess.Popen(bc3.split(), stdout=subprocess.PIPE)
+    out1 = str(p1.communicate()[0])
+    sizea = [int(s) for s in out1.split() if s.isdigit()][0]
+
+    p2 = subprocess.Popen(bc4.split(), stdout=subprocess.PIPE)
+    out2 = str(p2.communicate()[0])
+    sizeb = [int(s) for s in out2.split() if s.isdigit()][0]    
     
-    
+    diff = sizeb - sizea
+    print('your password has ' + str(diff) + ' bytes of entropy,')
+    print('or ' + str(diff*8) + ' bits of entropy')
+
+    #removes temporary files
     bcrm1 = "rm a.tar.gz"
     bcrm2 = "rm b.tar.gz"
     bcrm3 = "rm appendedplist.txt"
-    prm1 = subprocess.Popen(bcrm1.split(), stdout=subprocess.PIPE)
-    prm2 = subprocess.Popen(bcrm2.split(), stdout=subprocess.PIPE)
-    prm3 = subprocess.Popen(bcrm3.split(), stdout=subprocess.PIPE)
-    
-    diff = y - x
-    print('your password has ' + str(diff*8) + ' bits of entropy')
-    
-    
+    subprocess.Popen(bcrm1.split(), stdout=subprocess.PIPE)
+    subprocess.Popen(bcrm2.split(), stdout=subprocess.PIPE)
+    subprocess.Popen(bcrm3.split(), stdout=subprocess.PIPE)
+  
 if __name__ == "__main__":
     main()
