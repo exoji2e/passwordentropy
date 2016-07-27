@@ -22,6 +22,12 @@ Maybe the attacker has information about you as well, but if assumed that the pa
 The NIST standard gives "Password123" (4 + 2x7 + 3x1.5 + 6) = 28.5 bits of entropy, while my program achieves 16 bits of entropy with a small passwordlist, and Password123 wasn't even in there. A random generated password like '5Zc1ZstssUT' with the same length, which would achieve the same NIST entropy, achieved 88 bits. 
 Here is a link to the NIST-standard: https://en.wikipedia.org/wiki/Password_strength#NIST_Special_Publication_800-63
 
+## Plans
+* Start using an internal, deterministic compressionalgorithm, which assumes a specific characterset.
+* Find a larger more reliable passwordlist
+* Connect passwordlists to language
+* Use/find larger passwordlists (that are more like dump, making common passwords more common in the list => encryption cost depends more on "commonness"
+
 ## Thanks
 Idea for this I thank ahn solo for!
 
