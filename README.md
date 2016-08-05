@@ -26,7 +26,7 @@ Here is a link to the NIST-standard: https://en.wikipedia.org/wiki/Password_stre
 * Start using an internal, deterministic compressionalgorithm, which assumes a specific characterset.
 * Find a larger more reliable passwordlist
 * Connect passwordlists to language
-* Use/find larger passwordlists (that are more like dump, making common passwords more common in the list => encryption cost depends more on "commonness"
+* Use passwordlists that are more like dumps, making common passwords more common in the list => encryption cost depends more on "commonness".
 
 ## Thanks
 Idea for this I thank ahn solo for!
