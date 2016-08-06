@@ -32,6 +32,4 @@ Here is a link to the NIST-standard: https://en.wikipedia.org/wiki/Password_stre
 Idea for this I thank ahn solo for!
 
 ## Notes
-* Right now I'm using tar.gz compression, which will overestimate the entropy, since all unicodecharacters are supported. Maybe I'll implement a compression algorithm, that can restrict to only [a-z],[A-Z],[0-9],' ', or maybe even a modifyable characterset. 
-* tar.gz seems to have some randomness built in, which has consequences that i might get a negative entropy if the password entert is 123, or something "very easy".
-* There seem to be some errors running the code on Linux, currently this is only developed and tested on os x
+* Right now I'm using gzip compression, which will overestimate the entropy, since all unicodecharacters are supported. Maybe I'll implement a compression algorithm, that can restrict to only [a-z],[A-Z],[0-9],' ', or maybe even a modifyable characterset. 
