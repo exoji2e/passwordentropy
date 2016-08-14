@@ -19,11 +19,10 @@ Usually the attackers has more information about the password, there are usually
 Maybe the attacker has information about you as well, but if assumed that the password is not connected to you, this should be a lot better than the NIST standard at least. 
 
 ## NIST
-The NIST standard gives "Password123" (4 + 2x7 + 3x1.5 + 6) = 28.5 bits of entropy, while my program achieves 16 bits of entropy with a small password list, and Password123 wasn't even in there. A randomly generated password like '5Zc1ZstssUT' with the same length, which would achieve the same NIST entropy, achieved 88 bits. 
-Here is a link to the NIST-standard: https://en.wikipedia.org/wiki/Password_strength#NIST_Special_Publication_800-63
+The NIST standard gives 'Password123' and '5Zc1ZstssUT' both (4 + 2x7 + 3x1.5 + 6) = 28.5 bits of entropy, while my program achieves 40 bits (5 bytes) of entropy for 'Password123' and 96 bits (12 bytes) for '5Zc1ZstssUT'. Since we are bounded by a smaller character set than ascii, maybe our bits are quite overestimated. The fact that NIST doesn't estimate a randomly generated password to a better score than "Password123" is insane. Maybe we should have bytes instead of bits as unit, and then it can be decided what the conversion factor should be, maybe 8 if the entire ascii is included, while 5-6 might be enough if only [a-z,0-9,A-Z] is included. Here is a link to the NIST-standard: https://en.wikipedia.org/wiki/Password_strength#NIST_Special_Publication_800-63
 
 ## Plans
-* Start using an internal, deterministic compressional gorithm, which assumes a specific character set.
+* Start using an internal, deterministic compression algorithm, which assumes a specific character set.
 * Find a larger more reliable password list
 * Connect password lists to language
 * Use password lists that are more like dumps, making common passwords more common in the list => encryption cost depends more on "commonness".
